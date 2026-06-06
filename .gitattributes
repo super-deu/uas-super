@@ -1,0 +1,13 @@
+# Normalkan akhir baris ke LF di repo (penting untuk file yang jalan di Linux/Docker)
+* text=auto eol=lf
+
+# File biner — jangan diutak-atik
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary

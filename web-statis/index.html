@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UAS Cloud Computing II &middot; Web Statis</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav">
+      <span class="logo">UAS<span>·</span>2388010007</span>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero-content" id="home">
+      <p class="eyebrow">Administrasi Server &middot; Cloud Computing II</p>
+      <h1>Web Statis &amp; Web Dinamis<br>siap di-deploy ke AWS</h1>
+      <p class="lead">
+        Halaman statis ini adalah salah satu dari dua aplikasi yang di-orkestrasi
+        dengan Docker Compose dan dirilis otomatis melalui CI/CD GitHub Actions.
+      </p>
+      <a class="btn" href="#about">Selengkapnya</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="about">
+      <h2>Tentang Proyek</h2>
+      <p>
+        Proyek UAS ini mendemonstrasikan <strong>Zero-Touch Deployment</strong>:
+        perubahan kode di komputer lokal cukup di-<code>git push</code>, lalu pipeline
+        membangun image, mengirimkannya ke server, dan me-restart kontainer di AWS EC2
+        tanpa downtime yang berarti.
+      </p>
+    </section>
+
+    <section class="section alt" id="stack">
+      <h2>Arsitektur Singkat</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Web Statis</h3>
+          <p>HTML &amp; CSS murni, disajikan via reverse proxy pada port 80.</p>
+        </div>
+        <div class="card">
+          <h3>Web Dinamis</h3>
+          <p>PHP + MariaDB dengan panel admin &amp; database ter-seeding otomatis.</p>
+        </div>
+        <div class="card">
+          <h3>Orkestrasi</h3>
+          <p>Docker Compose: jaringan internal, volume persisten, dan variabel environment.</p>
+        </div>
+        <div class="card">
+          <h3>CI/CD</h3>
+          <p>GitHub Actions: build &rarr; push image &rarr; deploy otomatis ke AWS EC2.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>Kontak</h2>
+      <p>NIM: <strong>2388010007</strong> &middot; Mata Kuliah: Administrasi Server (Cloud Computing II)</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> UAS-2388010007 &middot; Web Statis</p>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

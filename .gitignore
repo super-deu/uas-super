@@ -1,0 +1,13 @@
+# Environment & secrets
+.env
+*.pem
+
+# Gambar yang diupload admin (data runtime, bukan source)
+web-dinamis/images/menu/*
+!web-dinamis/images/menu/.gitkeep
+
+# OS / editor
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/

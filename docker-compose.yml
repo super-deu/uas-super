@@ -1,0 +1,64 @@
+# ============================================================
+#  UAS-2388010007 — Orkestrasi 2 aplikasi + database
+#    web-statis  : Nginx        -> http://<host>:80
+#    web-dinamis : PHP + Apache -> http://<host>:8080
+#    db          : MariaDB (internal, auto-seed dari sql/init.sql)
+# ============================================================
+
+services:
+  db:
+    image: mariadb:10.11
+    container_name: uas_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-Root_2388010007!}
+      MYSQL_DATABASE: ${DATABASE_NAME:-feane}
+      MYSQL_USER: ${DATABASE_USER:-uas}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD:-Password123..}
+    volumes:
+      - db_data:/var/lib/mysql
+      # Auto-seed: dieksekusi sekali saat database pertama kali dibuat
+      - ./web-dinamis/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - uasnet
+
+  web-dinamis:
+    image: ${DOCKERHUB_USERNAME:-superdeuuu}/${DOCKER_REPO_DINAMIS:-web-dinamis}:latest
+    build: ./web-dinamis
+    container_name: uas_web_dinamis
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_NAME: ${DATABASE_NAME:-feane}
+      DATABASE_USER: ${DATABASE_USER:-uas}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-Password123..}
+    ports:
+      - "8080:80"
+    networks:
+      - uasnet
+
+  web-statis:
+    image: ${DOCKERHUB_USERNAME:-superdeuuu}/${DOCKER_REPO_STATIS:-web-statis}:latest
+    build: ./web-statis
+    container_name: uas_web_statis
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - uasnet
+
+volumes:
+  db_data:
+
+networks:
+  uasnet:
+    driver: bridge

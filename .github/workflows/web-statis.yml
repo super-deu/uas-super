@@ -1,0 +1,54 @@
+name: Deploy Web Statis
+
+# Paths filter: hanya jalan kalau ada perubahan di web-statis/.
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'web-statis/**'
+      - '.github/workflows/web-statis.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Login ke Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKER_KEY }}
+
+      - name: Build & Push image web-statis
+        uses: docker/build-push-action@v5
+        with:
+          context: ./web-statis
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_REPO_STATIS }}:latest
+
+      - name: Salin compose ke EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USERNAME }}
+          key: ${{ secrets.AWS_KEY }}
+          source: "docker-compose.yml"
+          target: "~/uas-super"
+
+      - name: Deploy di EC2 (pull image terbaru & restart)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USERNAME }}
+          key: ${{ secrets.AWS_KEY }}
+          script: |
+            cd ~/uas-super
+            echo "${{ secrets.DOCKER_KEY }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+            export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            export DOCKER_REPO_STATIS=${{ secrets.DOCKER_REPO_STATIS }}
+            docker compose pull web-statis
+            docker compose up -d --no-build web-statis
+            docker image prune -f
