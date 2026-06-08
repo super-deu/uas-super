@@ -118,7 +118,7 @@ function navActive(string $name, string $active): string
               <div class="row">
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
-                    <h1>Fast Food RestaurantTTT</h1>
+                    <h1>Fast Food Restaurantt</h1>
                     <p>Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.</p>
                     <div class="btn-box">
                       <a href="menu.php" class="btn1">Order Now</a>
