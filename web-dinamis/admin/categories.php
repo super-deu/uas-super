@@ -85,7 +85,7 @@ require __DIR__ . '/partials/header.php';
                    value="<?= e($editing['name'] ?? '') ?>">
             <small class="text-muted">Slug dibuat otomatis (mis. "Ice Cream" &rarr; ice-cream).</small>
           </div>
-          <button type="submit" class="btn btn-feane btn-block"><?= $editing ? 'Simpan Perubahan' : 'Tambah' ?></button>
+          <button type="submit" class="btn btn-feane btn-block"><?= $editing ? 'Simpan Perubahan' : 'save' ?></button>
           <?php if ($editing): ?>
             <a href="categories.php" class="btn btn-link btn-block">Batal</a>
           <?php endif; ?>
