@@ -85,18 +85,22 @@ Variabel dibaca dari `.env` (lihat `.env.example`). **`.env` tidak di-commit** (
 <img width="1600" height="745" alt="image" src="https://github.com/user-attachments/assets/5056fd66-3384-40c4-8f3f-fbeb744fbc78" />
 
 - [x] GitHub Actions berstatus sukses (centang hijau)
-  <img width="1600" height="798" alt="image" src="https://github.com/user-attachments/assets/d6c6c937-0010-4b61-b9ad-56240fae90ea" />
+<img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/55cf7250-faa6-4bb8-8d8e-ab772e5a833b" />
+
 
 - [x] `http://13.55.219.242/` (web statis, port 80)
-  <img width="1600" height="792" alt="image" src="https://github.com/user-attachments/assets/66b8c098-845d-43ea-b31a-cca275126a8a" />
+  <img width="1600" height="798" alt="image" src="https://github.com/user-attachments/assets/d6c6c937-0010-4b61-b9ad-56240fae90ea" />
 
 - [x] `http://13.55.219.242:8080/` (web dinamis) + admin login
-<img width="1600" height="794" alt="image" src="https://github.com/user-attachments/assets/7464b8b2-4da3-46aa-8cdb-68688dd91743" />
+<img width="1600" height="792" alt="image" src="https://github.com/user-attachments/assets/8097d31c-145f-44dc-a901-41a216f70678" />
+
 
 - [x] `docker compose ps` di EC2 (semua container Up & healthy)
-<img width="1600" height="790" alt="image" src="https://github.com/user-attachments/assets/0a3eb714-d55e-493a-bf2c-736686013103" />
-<img width="1600" height="740" alt="image" src="https://github.com/user-attachments/assets/b026e194-0fac-4904-88e7-59dc539c752d" />
-![Uploading image.png…]()
+<img width="1600" height="794" alt="image" src="https://github.com/user-attachments/assets/b9c5a841-14ab-4112-aab4-372e2e107030" />
+<img width="1600" height="790" alt="image" src="https://github.com/user-attachments/assets/d5316bcd-e5bb-40ad-8355-a4b5256d10fa" />
+<img width="1600" height="740" alt="image" src="https://github.com/user-attachments/assets/774af0a3-51f6-4d19-b004-7fbbf4b48596" />
+
+
 
 ---
 
