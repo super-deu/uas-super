@@ -99,6 +99,7 @@ Variabel dibaca dari `.env` (lihat `.env.example`). **`.env` tidak di-commit** (
 <img width="1600" height="794" alt="image" src="https://github.com/user-attachments/assets/b9c5a841-14ab-4112-aab4-372e2e107030" />
 <img width="1600" height="790" alt="image" src="https://github.com/user-attachments/assets/d5316bcd-e5bb-40ad-8355-a4b5256d10fa" />
 <img width="1600" height="740" alt="image" src="https://github.com/user-attachments/assets/774af0a3-51f6-4d19-b004-7fbbf4b48596" />
+<img width="1919" height="948" alt="image" src="https://github.com/user-attachments/assets/6eea1502-a4a7-4d13-8192-f2c9b8dae02f" />
 
 
 
