@@ -77,68 +77,31 @@ Variabel dibaca dari `.env` (lihat `.env.example`). **`.env` tidak di-commit** (
 | `AWS_USERNAME` | `ubuntu` |
 | `AWS_KEY` | isi private key `.pem` |
 
----
-
-## 3. Menjalankan secara Lokal
-
-### a) XAMPP (web dinamis saja)
-1. Taruh `web-dinamis/` di `htdocs`, jalankan Apache + MySQL XAMPP.
-2. Import `web-dinamis/sql/init.sql` via phpMyAdmin.
-3. Buka `http://localhost/web-dinamis/`.
-
-### b) Docker Compose (full stack)
-```bash
-docker compose up -d --build
-# Web statis  : http://localhost/
-# Web dinamis : http://localhost:8080/
-```
-
----
-
-## 4. Setup Awal AWS EC2 (sekali saja)
-
-```bash
-# SSH ke EC2
-ssh -i kunci.pem ubuntu@13.55.219.242
-
-# Install Docker + plugin compose
-sudo apt-get update
-sudo apt-get install -y docker.io docker-compose-plugin
-sudo usermod -aG docker ubuntu        # agar tanpa sudo (logout-login)
-
-# Siapkan folder kerja deploy
-mkdir -p ~/uas-super/web-dinamis/sql
-```
-
-**Security Group** (inbound) yang harus dibuka: `22` (SSH), `80` (web statis), `8080` (web dinamis).
-
----
-
-## 5. CI/CD — Zero-Touch Deployment
-
-Setiap `git push` ke branch `main`:
-1. **Paths filter** menentukan workflow mana yang jalan
-   (`web-dinamis/**` → `web-dinamis.yml`, `web-statis/**` → `web-statis.yml`)
-   sehingga pipeline kedua app **terisolasi** dan hemat runner.
-2. Workflow **build → push image** ke Docker Hub.
-3. **SCP** `docker-compose.yml` (+ `init.sql`) ke EC2, lalu **SSH**
-   `docker compose pull && docker compose up -d` → kontainer di-restart
-   dengan image terbaru **tanpa downtime signifikan**.
-
-### Demo Live Test
-Ubah teks di `web-statis/index.html` atau menu di web dinamis → `git commit` → `git push`
-→ tunggu Actions hijau → refresh browser → perubahan langsung tampil di AWS.
-
----
-
-## 6. Bukti Pengujian (screenshot)
+## 3. Bukti Pengujian (screenshot)
 
 > _Lampirkan screenshot di sini:_
-- [ ] GitHub Actions berstatus sukses (centang hijau)
-- [ ] `http://13.55.219.242/` (web statis, port 80)
-- [ ] `http://13.55.219.242:8080/` (web dinamis) + admin login
-- [ ] `docker compose ps` di EC2 (semua container Up & healthy)
-- [ ] Demo Zero-Touch (sebelum & sesudah git push)
+- [x] Create instance & setting port (securty group)
+<img width="1600" height="797" alt="image" src="https://github.com/user-attachments/assets/75bd85c4-31d9-4f8b-8799-ac2e88f7d0d7" />
+<img width="1600" height="745" alt="image" src="https://github.com/user-attachments/assets/5056fd66-3384-40c4-8f3f-fbeb744fbc78" />
+
+- [x] GitHub Actions berstatus sukses (centang hijau)
+<img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/55cf7250-faa6-4bb8-8d8e-ab772e5a833b" />
+
+
+- [x] `http://13.55.219.242/` (web statis, port 80)
+  <img width="1600" height="798" alt="image" src="https://github.com/user-attachments/assets/d6c6c937-0010-4b61-b9ad-56240fae90ea" />
+
+- [x] `http://13.55.219.242:8080/` (web dinamis) + admin login
+<img width="1600" height="792" alt="image" src="https://github.com/user-attachments/assets/8097d31c-145f-44dc-a901-41a216f70678" />
+
+
+- [x] `docker compose ps` di EC2 (semua container Up & healthy)
+<img width="1600" height="794" alt="image" src="https://github.com/user-attachments/assets/b9c5a841-14ab-4112-aab4-372e2e107030" />
+<img width="1600" height="790" alt="image" src="https://github.com/user-attachments/assets/d5316bcd-e5bb-40ad-8355-a4b5256d10fa" />
+<img width="1600" height="740" alt="image" src="https://github.com/user-attachments/assets/774af0a3-51f6-4d19-b004-7fbbf4b48596" />
+<img width="1919" height="948" alt="image" src="https://github.com/user-attachments/assets/6eea1502-a4a7-4d13-8192-f2c9b8dae02f" />
+
+
 
 ---
 
